@@ -126,10 +126,28 @@ Transactions are run as if they are serialized one after the other. No concurren
 
 - Referential Integrity
 
+
 #### Consistency in Read
 
 - Eventual consistency
+	- Once your data is in two places, your data is inconsistent.
+		- When we want to scale horizontally or when you introduce cache.
 
 
 ## Durability
+
+Ability to persist changes when the txn commits. Changes made by committed transactions must be persisted in a durable non-volatile storage.
+
+Durability techniques:
+- WAL - Write Ahead Log
+	- DBMSs persist a compressed version of the changes known as WAL (write-ahead-log segments)
+- Asynchronous snapshot
+- AOF
+
+
+OS Cache
+- A write request in OS usually goes to the OS Cache.
+- When the write goes to the OS Cache, an OS Crash, machine restart could lead to loss of data.
+- Fsync OS command forces writes to always go to disk. (AS A RESULT IT BECOMES SLOW)
+
 
