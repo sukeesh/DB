@@ -94,7 +94,7 @@ Isolation levels for inflight transactions. These were invented to solve "Read p
 
 No Isolation, any change from outside is visible to the transaction, committed or not.
 
-#### Read committed
+#### Read committed / Non - Repeatable read
 
 Most populor. Each txn only sees committed changes by other txns.
 
@@ -110,8 +110,6 @@ To make read repeatable. The txn will make sure that when a query reads a row, t
 Transactions are run as if they are serialized one after the other. No concurrency.
 
 **Note** Each DBMS implements isolation level differently.
-
-
 
 
 - Pessimistic - Row level locks, table locks, page locks to avoid lost updates. (Don't touch this row)
@@ -149,5 +147,15 @@ OS Cache
 - A write request in OS usually goes to the OS Cache.
 - When the write goes to the OS Cache, an OS Crash, machine restart could lead to loss of data.
 - Fsync OS command forces writes to always go to disk. (AS A RESULT IT BECOMES SLOW)
+
+
+## Serializable vs Repeatable read
+
+In Serializable, DB won't let txn to commit, if there are new changes after txn has begun. Retrying whole txn might help. But in Repeatable read, it lets you commit.
+
+TODO: One way to achieve this is by using Pessimisstic locks.
+
+
+
 
 
